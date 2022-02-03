@@ -1,15 +1,13 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex, { createLogger } from "vuex";
+import apiModule from "./modules/api";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+const isDev = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+  modules: { api: apiModule },
+  strict: isDev,
+  plugins: isDev ? [createLogger()] : [],
+});

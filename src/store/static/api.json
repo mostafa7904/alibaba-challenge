@@ -1,0 +1,19 @@
+{
+  "API_VERSION": "v2",
+  "BASE_URL": "https://restcountries.com/v2/",
+  "routes": {
+    "SEARCH_BY_NAME": "name/",
+    "ALL": "all/"
+  },
+  "queries": {
+    "FULL_NAME": "fullText=true",
+    "FIELDS": "fields="
+  },
+  "fields": {
+    "NAME": "name",
+    "CAPITAL": "capital",
+    "POPULATION": "population",
+    "REGION": "region",
+    "FLAGS": "flags"
+  }
+}

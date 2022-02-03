@@ -1,0 +1,187 @@
+/**
+  I would add an extra ".fluid" class and change this ".container" class
+  but since we don't use a noraml container here it's pointless
+*/
+.container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/** 
+  Display and layout
+*/
+.d-flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// I would normally write a function for this but since it's not needed and i don't have time I'll just hard code it
+.flex-column {
+  flex-direction: column;
+}
+
+.sm\:flex-row {
+  @media screen and (min-width: map-get($sizes, "sm")) {
+    flex-direction: row;
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+$total-columns: 12;
+@for $i from 1 to $total-columns + 1 {
+  .gap-#{$i} {
+    gap: 0.25rem * $i;
+  }
+  .grid-col-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+  @each $size-name, $size in $sizes {
+    .#{$size-name}\:gap-#{$i} {
+      @media screen and (min-width: $size) {
+        gap: 0.25rem * $i;
+      }
+    }
+    .#{$size-name}\:grid-col-#{$i} {
+      @media screen and (min-width: $size) {
+        grid-template-columns: repeat($i, minmax(0, 1fr));
+      }
+    }
+  }
+}
+
+/** 
+  Font weights
+*/
+.font-light {
+  font-weight: $font-light;
+}
+.font-semibold {
+  font-weight: $font-semibold;
+}
+.font-bold {
+  font-weight: $font-bold;
+}
+
+/** 
+  Font sizes
+*/
+.text-xs {
+  font-size: 0.7rem;
+}
+.text-sm {
+  font-size: 0.9rem;
+}
+.text-md {
+  font-size: 1.1rem;
+}
+.text-lg {
+  font-size: 1.3rem;
+}
+.text-xl {
+  font-size: 1.5rem;
+}
+
+.shadow {
+  // box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+}
+
+/**
+  Margin and Paddings
+  Will generate m/p + direction-value
+  All values are the multiply of 4px 
+  Example: mt-2 margin-top: 4px * 2
+  Example: mx-10 margin-left: 4px * 10; margin-right: 4px * 10; 
+*/
+
+/** 
+  I won't add extra code like px-auto,... since it's unnecessary and won't be used in this app
+*/
+.mx-auto {
+  margin: 0 auto;
+}
+
+$types: (
+  padding: p,
+  margin: m,
+);
+
+$margins: (
+  t: top,
+  l: left,
+  b: bottom,
+  r: right,
+  x: "",
+  y: "",
+);
+
+@mixin get-spacing($type, $dir, $value, $important) {
+  #{$type}-#{$dir}: $value if($important, !important, null);
+}
+
+@each $type, $type-short in $types {
+  @for $i from 0 through 20 {
+    @each $dir-short-name, $dir-full-name in $margins {
+      .#{$type-short}#{$dir-short-name}-#{$i} {
+        @if $dir-short-name == x {
+          @include get-spacing($type, right, 4px * $i, false);
+          @include get-spacing($type, left, 4px * $i, false);
+        } @else if $dir-short-name == y {
+          @include get-spacing($type, top, 4px * $i, false);
+          @include get-spacing($type, bottom, 4px * $i, false);
+        } @else {
+          @include get-spacing($type, $dir-full-name, 4px * $i, false);
+        }
+      }
+      @each $size-name, $size in $sizes {
+        .#{$size-name}\:#{$type-short}#{$dir-short-name}-#{$i} {
+          @media screen and (min-width: $size) {
+            @if $dir-short-name == x {
+              @include get-spacing($type, right, 4px * $i, true);
+              @include get-spacing($type, left, 4px * $i, true);
+            } @else if $dir-short-name == y {
+              @include get-spacing($type, top, 4px * $i, true);
+              @include get-spacing($type, bottom, 4px * $i, true);
+            } @else {
+              @include get-spacing($type, $dir-full-name, 4px * $i, true);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+  Backgrounds and colors
+  Will generate text-color for color and bg-color for background
+*/
+@each $name, $color in $colors {
+  .text-#{$name} {
+    color: $color;
+  }
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+.list-style-none {
+  list-style-type: none;
+}

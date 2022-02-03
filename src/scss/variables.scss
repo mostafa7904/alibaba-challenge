@@ -1,0 +1,76 @@
+/**
+  Colors
+*/
+$blue: hsl(209, 23%, 22%); // (Dark Mode Elements)
+$dark-blue: hsl(207, 26%, 17%); // (Dark Mode Background)
+$extra-dark-blue: hsl(200, 15%, 8%); // (Light Mode Text)
+$grey: hsl(0, 0%, 52%); // (Light Mode Input)
+$light-grey: hsl(0, 0%, 98%); // (Light Mode Background)
+$white: hsl(0, 0%, 100%); // (Dark Mode Text & Light Mode Elements)
+
+$colors: (
+  blue: $blue,
+  dark-blue: $dark-blue,
+  extra-dark-blue: $extra-dark-blue,
+  grey: $grey,
+  light-grey: $light-grey,
+  white: $white,
+);
+
+:root {
+  --al-text-primary: #{$extra-dark-blue};
+  --al-bg-primary: #{$light-grey};
+  --al-bg-secondary: #{$white};
+}
+
+:root.theme-dark {
+  --al-text-primary: #{$white};
+  --al-bg-primary: #{$dark-blue};
+  --al-bg-secondary: #{$blue};
+}
+
+/**
+  Typography
+*/
+$font-light: 300;
+$font-semibold: 600;
+$font-bold: 800;
+
+$font-xs: 0.6rem;
+$font-sm: 0.8rem;
+$font-md: 1rem;
+$font-lg: 1.2rem;
+$font-xl: 1.4rem;
+
+/**
+  Shadows
+  - Using tailwindcss shadows
+  - https://tailwindcss.com/docs/box-shadow
+*/
+$shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+/**
+  Screen helpers
+  - Using vuetify's screen helpers with slight changes
+  - https://vuetifyjs.com/en/styles/display/#display
+*/
+$sizes: (
+  sm: 640px,
+  md: 960px,
+  lg: 1264px,
+  xl: 1904px,
+);
+
+/**
+  Border radius
+  - Using tailwindcss rounded values
+  - https://tailwindcss.com/docs/border-radius
+*/
+$rounded-sm: 0.125rem;
+$rounded: 0.25rem;
+$rounded-md: 0.375rem;
+$rounded-lg: 0.5rem;
+$rounded-xl: 0.75rem;
