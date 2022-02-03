@@ -12,7 +12,7 @@
   "fields": {
     "NAME": "name",
     "NATIVE_NAME": "nativeName",
-    "REGIONAL_BLOCKS": "regionalBlocs",
+    "SUB_REGION": "subregion",
     "CAPITAL": "capital",
     "POPULATION": "population",
     "REGION": "region",

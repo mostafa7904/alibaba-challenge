@@ -116,7 +116,7 @@ export default {
         },
         {
           title: "Sub Region",
-          field: "regionalBlocs",
+          field: "subregion",
           subField: "name",
         },
         {

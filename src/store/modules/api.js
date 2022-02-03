@@ -65,7 +65,7 @@ const actions = {
       const fields = [
         "CAPITAL",
         "NAME",
-        "REGIONAL_BLOCKS",
+        "SUB_REGION",
         "NATIVE_NAME",
         "POPULATION",
         "REGION",
