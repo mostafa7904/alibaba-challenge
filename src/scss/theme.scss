@@ -15,6 +15,10 @@
   display: flex;
 }
 
+.d-grid {
+  display: grid;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -36,10 +40,6 @@
   @media screen and (min-width: map-get($sizes, "sm")) {
     flex-direction: row;
   }
-}
-
-.grid {
-  display: grid;
 }
 
 $total-columns: 12;
@@ -81,34 +81,39 @@ $total-columns: 12;
   Font sizes
 */
 .text-xs {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
 }
 .text-sm {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 .text-md {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .text-lg {
-  font-size: 1.3rem;
+  font-size: 1.125rem;
 }
 .text-xl {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
-.shadow {
-  // box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  box-shadow: $shadow;
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
+/**
+  Shadows
+*/
+@each $shadow-key, $shadow-value in $shadows {
+  .shadow-#{$shadow-key} {
+    box-shadow: $shadow-value;
+    -webkit-box-shadow: $shadow-value;
+    -moz-box-shadow: $shadow-value;
+  }
 }
 
 /**
   Margin and Paddings
   Will generate m/p + direction-value
-  All values are the multiply of 4px 
+  All values are the multiply of 4px
+  Using vuetify spacing system: https://vuetifyjs.com/en/styles/spacing/#how-it-works
   Example: mt-2 margin-top: 4px * 2
-  Example: mx-10 margin-left: 4px * 10; margin-right: 4px * 10; 
+  Example: mx-10 margin-left: 4px * 10; margin-right: 4px * 10;
 */
 
 /** 
@@ -170,18 +175,8 @@ $margins: (
 }
 
 /**
-  Backgrounds and colors
-  Will generate text-color for color and bg-color for background
+  Other
 */
-@each $name, $color in $colors {
-  .text-#{$name} {
-    color: $color;
-  }
-  .bg-#{$name} {
-    background-color: $color;
-  }
-}
-
 .list-style-none {
   list-style-type: none;
 }

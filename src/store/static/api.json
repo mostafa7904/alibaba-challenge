@@ -11,9 +11,15 @@
   },
   "fields": {
     "NAME": "name",
+    "NATIVE_NAME": "nativeName",
+    "REGIONAL_BLOCKS": "regionalBlocs",
     "CAPITAL": "capital",
     "POPULATION": "population",
     "REGION": "region",
-    "FLAGS": "flags"
+    "FLAGS": "flags",
+    "TOP_LEVEL_DOMAIN": "topLevelDomain",
+    "CURRENCIES": "currencies",
+    "LANGUAGES": "languages",
+    "BORDERS": "borders"
   }
 }

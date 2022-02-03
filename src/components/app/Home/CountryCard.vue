@@ -31,32 +31,17 @@
 <script>
 import AlCard from "../../core/Card/AlCard.vue";
 import AlImg from "../../core/Image/AlImg.vue";
+import Presenter from "../../../mixins/Presenter";
 
 export default {
   components: { AlCard, AlImg },
   name: "CountryCard",
-
+  mixins: [Presenter],
   props: {
     country: {
       type: Object,
       required: true,
     },
   },
-  filters: {
-    prettyNumbers(number) {
-      return number
-        .toString()
-        .split("")
-        .reverse()
-        .join("")
-        .split(/(.{3})/)
-        .filter((o) => o)
-        .map((s) => s.split("").reverse().join(""))
-        .reverse()
-        .join();
-    },
-  },
 };
 </script>
-
-<style></style>

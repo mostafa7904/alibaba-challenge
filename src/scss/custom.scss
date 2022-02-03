@@ -3,10 +3,8 @@
   font-family: "Nunito Sans", sans-serif;
   min-height: 100%;
   max-width: 100%;
-  will-change: background-color color;
   color: var(--al-text-primary);
   fill: var(--al-text-primary);
-  // overflow-x: hidden;
 }
 
 header {
@@ -25,4 +23,5 @@ header {
 
 main {
   background-color: var(--al-bg-primary);
+  min-height: 100vh;
 }

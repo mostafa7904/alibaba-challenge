@@ -66,7 +66,9 @@ export default {
 }
 
 .al-card[elevated] {
-  box-shadow: $shadow;
+  box-shadow: $shadow-md;
+  -webkit-box-shadow: $shadow-md;
+  -moz-box-shadow: $shadow-md;
 }
 .al-card[rounded] {
   border-top-left-radius: $rounded-md;

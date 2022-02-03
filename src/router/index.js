@@ -10,6 +10,12 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  {
+    path: "/detail/:country",
+    name: "Detail",
+    props: (route) => ({ country: route.params.country }),
+    component: () => import("../views/Detail.vue"),
+  },
 ];
 
 const router = new VueRouter({

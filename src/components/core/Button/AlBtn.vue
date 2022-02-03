@@ -16,9 +16,12 @@ export default {
 .al-btn {
   cursor: pointer;
   text-align: center;
-  padding: unset;
   max-height: 35px;
-  min-height: 35px;
+  min-height: 30px;
+  border-width: 0;
+  border-radius: 5px;
+  background-color: var(--al-bg-secondary);
+  color: var(--al-text-primary);
 }
 
 .al-btn__content {

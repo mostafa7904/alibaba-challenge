@@ -1,0 +1,15 @@
+@import "../variables";
+
+.back-btn {
+  box-shadow: $shadow-md;
+  padding: 0 30px;
+}
+
+.details-container {
+  margin-top: 50px;
+}
+
+.country-name {
+  font-size: $font-xl;
+  font-weight: $font-bold;
+}

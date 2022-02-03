@@ -68,8 +68,8 @@ export default {
 }
 
 .al-input__container[elevated] {
-  box-shadow: $shadow;
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
+  box-shadow: $shadow-md;
+  -webkit-box-shadow: $shadow-md;
+  -moz-box-shadow: $shadow-md;
 }
 </style>

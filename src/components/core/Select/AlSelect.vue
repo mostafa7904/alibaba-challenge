@@ -106,9 +106,9 @@ $select-menu-margin: 5px;
 }
 
 .al-select__container[elevated] {
-  box-shadow: $shadow;
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
+  box-shadow: $shadow-md;
+  -webkit-box-shadow: $shadow-md;
+  -moz-box-shadow: $shadow-md;
 }
 
 .al-select__menu {

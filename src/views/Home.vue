@@ -22,7 +22,7 @@
     </div>
 
     <div
-      class="grid grid-col-1 sm:grid-col-2 md:grid-col-3 lg:grid-col-4 gap-4 md:gap-12 mt-12"
+      class="d-grid grid-col-1 sm:grid-col-2 md:grid-col-3 lg:grid-col-4 gap-4 md:gap-12 mt-12"
       v-if="!loading"
     >
       <country-card
