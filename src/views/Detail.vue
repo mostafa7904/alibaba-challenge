@@ -144,6 +144,8 @@ export default {
   }),
   async mounted() {
     try {
+      // If the detail of the country exists in the store don't send a request
+      if (this.country && this.country.name == this.$attrs.country) return;
       this.loading = true;
       await this.getCountryDetail(this.$attrs.country);
     } finally {

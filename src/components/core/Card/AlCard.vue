@@ -1,6 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
+    :link="link"
     :role="link ? 'link' : 'listitem'"
     @click="cardClick"
     class="al-card"
@@ -61,7 +62,7 @@ export default {
   background-color: var(--al-bg-secondary);
 }
 
-.al-card[role="link"] {
+.al-card[link] {
   cursor: pointer;
 }
 

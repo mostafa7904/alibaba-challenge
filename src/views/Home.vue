@@ -62,6 +62,8 @@ export default {
   },
   async mounted() {
     try {
+      // If the value exists in the store do not send another request
+      if (this.countries.length) return;
       this.loading = true;
       await this.getAllCountries();
     } finally {

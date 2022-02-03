@@ -14,6 +14,9 @@
   padding: 0;
 }
 
+.test > * {
+  outline: solid red 1px;
+}
 html,
 body {
   line-height: 1.15;
@@ -22,10 +25,6 @@ body {
   touch-action: manipulation;
   overflow-x: hidden;
   text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
   word-spacing: 3px;
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;

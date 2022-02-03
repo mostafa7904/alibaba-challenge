@@ -102,8 +102,6 @@ $total-columns: 12;
 @each $shadow-key, $shadow-value in $shadows {
   .shadow-#{$shadow-key} {
     box-shadow: $shadow-value;
-    -webkit-box-shadow: $shadow-value;
-    -moz-box-shadow: $shadow-value;
   }
 }
 
@@ -113,7 +111,7 @@ $total-columns: 12;
   All values are the multiply of 4px
   Using vuetify spacing system: https://vuetifyjs.com/en/styles/spacing/#how-it-works
   Example: mt-2 margin-top: 4px * 2
-  Example: mx-10 margin-left: 4px * 10; margin-right: 4px * 10;
+  Example: mx-8 margin-left: 4px * 8; margin-right: 4px * 8;
 */
 
 /** 

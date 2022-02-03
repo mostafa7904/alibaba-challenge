@@ -14,7 +14,8 @@ const routes = [
     path: "/detail/:country",
     name: "Detail",
     props: (route) => ({ country: route.params.country }),
-    component: () => import("../views/Detail.vue"),
+    component: () =>
+      import(/* webpackChunkName: "detail" */ "../views/Detail.vue"),
   },
 ];
 
