@@ -31,7 +31,7 @@
   text-align: center;
 }
 
-// I would normally write a function for this but since it's not needed and i don't have time I'll just hard code it
+// I would normally write a function for this but since it's not needed and i don't have enough time I'll just hard code it
 .flex-column {
   flex-direction: column;
 }
@@ -43,10 +43,22 @@
 }
 
 $total-columns: 12;
-@for $i from 1 to $total-columns + 1 {
+$gap-total: 25;
+
+@for $i from 1 to $gap-total {
   .gap-#{$i} {
     gap: 0.25rem * $i;
   }
+  @each $size-name, $size in $sizes {
+    .#{$size-name}\:gap-#{$i} {
+      @media screen and (min-width: $size) {
+        gap: 0.25rem * $i;
+      }
+    }
+  }
+}
+
+@for $i from 1 to $total-columns + 1 {
   .grid-col-#{$i} {
     grid-template-columns: repeat($i, minmax(0, 1fr));
   }

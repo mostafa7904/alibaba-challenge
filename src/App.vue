@@ -1,5 +1,5 @@
 <template>
-  <div class="" id="app" ref="app">
+  <div id="app" ref="app">
     <header class="shadow-lg">
       <nav-bar @toggle-theme="onThemeToggle" />
     </header>

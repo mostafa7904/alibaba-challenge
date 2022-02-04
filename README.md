@@ -91,7 +91,7 @@ All the other packages used are for development.
 - SEO :100
 - Best practices: 100
 
-This website got a 78 score in performance in lighthouse for mobile. The build bundle was under 200kb.
+This website got a 78 score in performance in lighthouse for mobile. The build bundle is 206kb | 72kb gziped.
 Because the search functionality is done locally and it also caches the search result, the search is extremely fast.
 
 This website has been tested in all major browsers and it is confirmed it behaves the same way.
@@ -110,6 +110,12 @@ The continents endpoint in the api was down. And since I've already made it, I d
 Since we have a lot of unused styles in our app we need to make sure they don't make it to production. Therefore i used the [purgecss](https://github.com/FullHuman/purgecss) plugin with [postcss](https://github.com/postcss/postcss) in order to remove all the unused css classes. Since I already installed postcss I thought it's a good opportunity to use the [autoprifixer](https://github.com/postcss/autoprefixer) plugin for adding the prefixed styles to the website.
 
 I also used Terser webpack plugin for some code minification and uglifying. It reduced abuot `10kb` from the production build.
+
+### Chalanges
+
+Some of the chalanges I faced were search functionality and getting the names of the border countries, which I didn't have enough time to finish. And a [wierd bug with installing postcss with vue-cli](https://github.com/FullHuman/purgecss/issues/654).
+
+Unfortunately I didn't see that using Nuxt or any server-side framework would be a bonus, and when I realized it was too late.
 
 ### Deployment 📦
 

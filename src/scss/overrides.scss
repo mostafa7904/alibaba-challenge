@@ -31,10 +31,6 @@ body {
     font-size: 0.95rem;
     word-spacing: 1px;
   }
-  @media screen and (max-width: map-get($sizes, "sm")) {
-    font-size: 0.9rem;
-    word-spacing: 1px;
-  }
 }
 
 svg,
