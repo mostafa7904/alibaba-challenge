@@ -82,12 +82,16 @@ All the other packages used are for development.
 
 #### Web vitals
 
-| Device  |  FCP  |  LPT  |
-| :-----: | :---: | :---: |
-| Mobile  | 1.5 s | 1.8 s |
-| Desktop |  1 s  | 0.9 s |
+| Device  |  FCP  |   CLS   |  LCP  |  TTI  | Total score |
+| :-----: | :---: | :-----: | :---: | :---: | :---------: |
+| Mobile  | 1.9 s | 0.001 s | 3.1 s | 3.6 s |     78      |
+| Desktop | 0.8 s |   0 s   | 1.1 s | 1.1 s |     91      |
 
-This website got a 89 score in performance in lighthouse for mobile. The build bundle was under 200kb.
+- Accessibility: 100
+- SEO :100
+- Best practices: 100
+
+This website got a 78 score in performance in lighthouse for mobile. The build bundle was under 200kb.
 Because the search functionality is done locally and it also caches the search result, the search is extremely fast.
 
 This website has been tested in all major browsers and it is confirmed it behaves the same way.

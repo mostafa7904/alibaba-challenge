@@ -19,6 +19,7 @@
     >
       <div class="sm:mr-20">
         <al-img
+          :alt="`${country.name}'s flag`"
           width="100%"
           max-height="350px"
           :src="
