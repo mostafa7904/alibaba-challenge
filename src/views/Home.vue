@@ -65,9 +65,22 @@ export default {
     await this.getCountries();
   },
   methods: {
+    /**
+     *
+     * @async
+     * @param {String} [search]
+     * @param {String} [filter]
+     * @description This function will get all the countries based on the params passed to it
+     * If the search param is passed it will search through the country names for the passed string
+     * If the filter param is passed it will filter the countries based on the filter
+     * If no param is passed then it will get all countries
+     *
+     */
     async getCountries(search, filter) {
       try {
         this.loading = true;
+
+        // Let the dom update
         await this.$nextTick();
         if (search) await this.search(search);
         else await this.getAllCountries(filter);
@@ -76,6 +89,7 @@ export default {
       }
     },
     async filterByContinent(continent) {
+      // If it's all then there are no filters
       if (continent == "All") {
         await this.getCountries();
         return;

@@ -27,11 +27,11 @@ const actions = {
     try {
       const filters = {
         all: "ALL",
-        continent: "SEARCH_BY_CONTINENT",
+        continent: "SEARCH_BY_CONTINENT", // This route is down
       };
-      console.log(filter);
 
-      let url = `${config.BASE_URL}`;
+      let url = `${config.BASE_URL}${config.API_VERSION}/`;
+
       // If a filter exsits then move to that route
       if (filter && filter.type in filters) {
         url += config.routes[filters[filter.type]];
@@ -76,9 +76,10 @@ const actions = {
   async getCountryDetail({ commit }, country) {
     try {
       // Make the url
-      let url = `${config.BASE_URL}`;
+      let url = `${config.BASE_URL}${config.API_VERSION}/`;
 
       // This means it's the alpha code
+      // There are better ways to do this but time was short
       if (country.length == 3) {
         url += `${config.routes.SEARCH_BY_ALPHA}`;
       } else {

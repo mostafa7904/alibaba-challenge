@@ -1,6 +1,6 @@
 {
   "API_VERSION": "v2",
-  "BASE_URL": "https://restcountries.com/v2/",
+  "BASE_URL": "https://restcountries.com/",
   "routes": {
     "SEARCH_BY_NAME": "name/",
     "SEARCH_BY_ALPHA": "alpha/",

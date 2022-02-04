@@ -100,6 +100,11 @@ This website has been tested in all major browsers and it is confirmed it behave
 
 This website uses google analytics to analyze trafic.
 
+### Testing
+
+I couldn't add any tests because of the shortage of time. Only the good old css outline property to test the layout.
+The continents endpoint in the api was down. And since I've already made it, I didn't have time to rewrite that part.
+
 ### Build
 
 Since we have a lot of unused styles in our app we need to make sure they don't make it to production. Therefore i used the [purgecss](https://github.com/FullHuman/purgecss) plugin with [postcss](https://github.com/postcss/postcss) in order to remove all the unused css classes. Since I already installed postcss I thought it's a good opportunity to use the [autoprifixer](https://github.com/postcss/autoprefixer) plugin for adding the prefixed styles to the website.
