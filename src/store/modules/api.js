@@ -7,7 +7,7 @@ const state = () => ({
 });
 
 const mutations = {
-  ADD_COUNTRIES(state, payload) {
+  SET_COUNTRIES(state, payload) {
     state.countries = payload;
   },
   SET_COUNTRY(state, payload) {
@@ -38,7 +38,7 @@ const actions = {
       // Send the request
       const res = await axios.get(url);
       // If there is data set it in state + return it
-      if (res.data) commit("ADD_COUNTRIES", res.data);
+      if (res.data) commit("SET_COUNTRIES", res.data);
       return res.data;
     } catch (e) {
       console.warn("Error in getting all countries!");
@@ -97,15 +97,55 @@ const actions = {
       return {};
     }
   },
+
+  /**
+   *
+   * @async
+   * @param {String} country Name of the country that needs detail
+   * @description This function will send a request to the api and get the passed country's name detail
+   * @returns {Object}
+   *
+   */
+  async getCountries({ commit }, searchTerm) {
+    try {
+      // Make the url
+      let url = `${config.BASE_URL}${config.routes.SEARCH_BY_NAME}${searchTerm}?${config.queries.FIELDS}`;
+
+      // All the fields we need
+      const fields = ["CAPITAL", "NAME", "POPULATION", "REGION", "FLAGS"];
+
+      // Add fields to the url
+      fields.forEach((field) => {
+        url += config.fields[field];
+        url += ",";
+      });
+      // Send the request
+      const res = await axios.get(url);
+
+      // If data is available store it + return it
+      if (res.data && res.data.length) {
+        commit("SET_COUNTRIES", res.data);
+        return res.data;
+      }
+      return [];
+    } catch (e) {
+      console.warn("Error in searching countries!");
+      console.info("store/index/getCountries");
+      console.error(e);
+      return {};
+    }
+  },
 };
 const getters = {
   countries(state) {
     return state.countries.map((country) => {
-      country.flag = country.flags.png;
-      if (country.name == "Afghanistan") {
-        country.flag = require("@/assets/afghanistan.png");
-      }
-      return country;
+      return {
+        ...country,
+        flag:
+          country.name == "Afghanistan"
+            ? require("@/assets/afghanistan.png")
+            : country.flags.png,
+      };
     });
   },
 };

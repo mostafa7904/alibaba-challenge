@@ -26,7 +26,7 @@
       v-if="!loading"
     >
       <country-card
-        v-for="(country, index) in countries"
+        v-for="(country, index) in filteredCountries"
         :key="index"
         :country="country"
       />
@@ -49,6 +49,7 @@ export default {
     loading: false,
     continents: ["All", "Africa", "America", "Asia", "Europe", "Oceania"],
     filter: null,
+    filteredCountries: [],
   }),
   computed: {
     ...mapGetters({
@@ -57,20 +58,29 @@ export default {
   },
   watch: {
     searchTerm(value) {
-      console.log(value);
+      this.getCountries(value);
     },
   },
   async mounted() {
-    try {
-      // If the value exists in the store do not send another request
-      if (this.countries.length) return;
-      this.loading = true;
-      await this.getAllCountries();
-    } finally {
-      this.loading = false;
-    }
+    await this.getCountries();
   },
-  methods: mapActions("api", ["getAllCountries"]),
+  methods: {
+    async getCountries(name) {
+      try {
+        this.loading = true;
+        await this.$nextTick();
+        if (name) await this.search(name);
+        else await this.getAllCountries();
+      } finally {
+        this.filteredCountries = this.countries;
+        this.loading = false;
+      }
+    },
+    ...mapActions({
+      getAllCountries: "api/getAllCountries",
+      search: "search/searchLocal",
+    }),
+  },
 };
 </script>
 
