@@ -23,10 +23,27 @@ const actions = {
    * @returns {Object[]}
    *
    */
-  async getAllCountries({ commit }) {
+  async getAllCountries({ commit }, filter) {
     try {
-      let url = `${config.BASE_URL}${config.routes.ALL}?${config.queries.FIELDS}`;
+      const filters = {
+        all: "ALL",
+        continent: "SEARCH_BY_CONTINENT",
+      };
+      console.log(filter);
+
+      let url = `${config.BASE_URL}`;
+      // If a filter exsits then move to that route
+      if (filter && filter.type in filters) {
+        url += config.routes[filters[filter.type]];
+        url += filter.value;
+      }
+      // Default to all
+      else {
+        url += config.routes.ALL;
+      }
+
       // All the fields we need
+      url += `?${config.queries.FIELDS}`;
       const fields = ["CAPITAL", "NAME", "POPULATION", "REGION", "FLAGS"];
 
       // Add fields to the url
@@ -59,7 +76,16 @@ const actions = {
   async getCountryDetail({ commit }, country) {
     try {
       // Make the url
-      let url = `${config.BASE_URL}${config.routes.SEARCH_BY_NAME}${country}?${config.queries.FIELDS}`;
+      let url = `${config.BASE_URL}`;
+
+      // This means it's the alpha code
+      if (country.length == 3) {
+        url += `${config.routes.SEARCH_BY_ALPHA}`;
+      } else {
+        url += `${config.routes.SEARCH_BY_NAME}`;
+      }
+
+      url += `${country}/?${config.queries.FIELDS}`;
 
       // All the fields we need
       const fields = [
@@ -85,54 +111,21 @@ const actions = {
       const res = await axios.get(url);
 
       // If data is available store it + return it
-      if (res.data && res.data.length) {
-        commit("SET_COUNTRY", res.data[0]);
-        return res.data[0];
+      if (res.data) {
+        if (res.data.length) {
+          commit("SET_COUNTRY", res.data[0]);
+          return res.data[0];
+        } else {
+          commit("SET_COUNTRY", res.data);
+          return res.data;
+        }
       }
-      return {};
+      return false;
     } catch (e) {
       console.warn("Error in getting the country's detail!");
       console.info("store/index/getCountryDetail");
       console.error(e);
-      return {};
-    }
-  },
-
-  /**
-   *
-   * @async
-   * @param {String} country Name of the country that needs detail
-   * @description This function will send a request to the api and get the passed country's name detail
-   * @returns {Object}
-   *
-   */
-  async getCountries({ commit }, searchTerm) {
-    try {
-      // Make the url
-      let url = `${config.BASE_URL}${config.routes.SEARCH_BY_NAME}${searchTerm}?${config.queries.FIELDS}`;
-
-      // All the fields we need
-      const fields = ["CAPITAL", "NAME", "POPULATION", "REGION", "FLAGS"];
-
-      // Add fields to the url
-      fields.forEach((field) => {
-        url += config.fields[field];
-        url += ",";
-      });
-      // Send the request
-      const res = await axios.get(url);
-
-      // If data is available store it + return it
-      if (res.data && res.data.length) {
-        commit("SET_COUNTRIES", res.data);
-        return res.data;
-      }
-      return [];
-    } catch (e) {
-      console.warn("Error in searching countries!");
-      console.info("store/index/getCountries");
-      console.error(e);
-      return {};
+      return false;
     }
   },
 };

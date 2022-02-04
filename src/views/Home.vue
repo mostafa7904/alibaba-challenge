@@ -15,7 +15,7 @@
         v-model="filter"
         elevated
         :items="continents"
-        :multiple="false"
+        @input="filterByContinent"
         class="mt-4 sm:mt-0"
         placeholder="Filter by region"
       />
@@ -26,12 +26,12 @@
       v-if="!loading"
     >
       <country-card
-        v-for="(country, index) in filteredCountries"
+        v-for="(country, index) in countries"
         :key="index"
         :country="country"
       />
     </div>
-    <div class="text-center font-bold text-lg mt-6" v-else>Loading...</div>
+    <al-loading v-else />
   </div>
 </template>
 
@@ -40,16 +40,16 @@ import { mapGetters, mapActions } from "vuex";
 import AlInput from "../components/core/Input/AlInput.vue";
 import CountryCard from "../components/app/Home/CountryCard.vue";
 import AlSelect from "../components/core/Select/AlSelect.vue";
+import AlLoading from "../components/core/Loading/AlLoading.vue";
 
 export default {
   name: "Home",
-  components: { AlInput, CountryCard, AlSelect },
+  components: { AlInput, CountryCard, AlSelect, AlLoading },
   data: () => ({
     searchTerm: null,
     loading: false,
     continents: ["All", "Africa", "America", "Asia", "Europe", "Oceania"],
     filter: null,
-    filteredCountries: [],
   }),
   computed: {
     ...mapGetters({
@@ -65,16 +65,25 @@ export default {
     await this.getCountries();
   },
   methods: {
-    async getCountries(name) {
+    async getCountries(search, filter) {
       try {
         this.loading = true;
         await this.$nextTick();
-        if (name) await this.search(name);
-        else await this.getAllCountries();
+        if (search) await this.search(search);
+        else await this.getAllCountries(filter);
       } finally {
-        this.filteredCountries = this.countries;
         this.loading = false;
       }
+    },
+    async filterByContinent(continent) {
+      if (continent == "All") {
+        await this.getCountries();
+        return;
+      }
+      await this.getCountries(null, {
+        type: "continent",
+        value: continent.toLowerCase(),
+      });
     },
     ...mapActions({
       getAllCountries: "api/getAllCountries",

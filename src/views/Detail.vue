@@ -7,8 +7,14 @@
       Back
     </al-btn>
 
+    <al-loading v-if="loading" />
+
+    <div v-else-if="notFound" class="text-center font-bold text-lg mt-6">
+      Country not found!
+    </div>
+
     <div
-      v-if="!loading"
+      v-else
       class="d-grid grid-col-1 sm:grid-col-2 details-container gap-4 sm:gap-12"
     >
       <div class="sm:mr-20">
@@ -68,6 +74,8 @@
         <div class="mt-8">
           <span>Border Countries: </span>
           <al-btn
+            link
+            :href="`/detail/${border}`"
             class="mr-2 mt-2 px-3 shadow-lg text-sm"
             v-for="(border, index) in country.borders"
             :key="index"
@@ -77,8 +85,6 @@
         </div>
       </div>
     </div>
-
-    <div v-else class="text-center text-xl font-bold">Loading...</div>
   </div>
 </template>
 
@@ -89,16 +95,18 @@ import ChevronLeft from "../components/app/Icons/ChevronLeft.vue";
 import AlBtn from "../components/core/Button/AlBtn.vue";
 import AlIcon from "../components/core/Icon/AlIcon.vue";
 import AlImg from "../components/core/Image/AlImg.vue";
+import AlLoading from "../components/core/Loading/AlLoading.vue";
 
 export default {
   name: "Detail",
-  components: { AlBtn, AlIcon, ChevronLeft, AlImg },
+  components: { AlBtn, AlIcon, ChevronLeft, AlImg, AlLoading },
   mixins: [Presenter],
   computed: {
     ...mapState("api", ["country"]),
   },
   data: () => ({
     loading: true,
+    notFound: false,
     fields: {
       basic: [
         {
@@ -142,21 +150,33 @@ export default {
       ],
     },
   }),
+
+  watch: {
+    async "$attrs.country"() {
+      await this.getDetail();
+    },
+  },
   async mounted() {
-    try {
-      // If the detail of the country exists in the store don't send a request
-      if (this.country && this.country.name == this.$attrs.country) return;
-      this.loading = true;
-      await this.getCountryDetail(this.$attrs.country);
-    } finally {
-      this.loading = false;
-    }
+    await this.getDetail();
   },
   methods: {
-    ...mapActions("api", ["getCountryDetail"]),
+    async getDetail() {
+      try {
+        this.notFound = false;
+        // If the detail of the country exists in the store don't send a request
+        if (this.country && this.country.name == this.$attrs.country) return;
+        this.loading = true;
+        const result = await this.getCountryDetail(this.$attrs.country);
+
+        if (!result) this.notFound = true;
+      } finally {
+        this.loading = false;
+      }
+    },
     goBack() {
       this.$router.go(-1);
     },
+    ...mapActions("api", ["getCountryDetail"]),
   },
 };
 </script>

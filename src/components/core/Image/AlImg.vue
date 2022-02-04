@@ -3,6 +3,7 @@
     class="al-img"
     loading="lazy"
     :style="{
+      aspectRatio: $attrs['aspect-ratio'],
       maxWidth: $attrs['max-width'],
       width: $attrs.width,
       height: $attrs.height,

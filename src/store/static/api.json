@@ -3,6 +3,8 @@
   "BASE_URL": "https://restcountries.com/v2/",
   "routes": {
     "SEARCH_BY_NAME": "name/",
+    "SEARCH_BY_ALPHA": "alpha/",
+    "SEARCH_BY_CONTINENT": "continent/",
     "ALL": "all/"
   },
   "queries": {

@@ -1,5 +1,10 @@
 <template>
-  <button class="al-btn" v-bind="$attrs" @click="$emit('click')">
+  <button
+    :role="link ? 'link' : 'button'"
+    class="al-btn"
+    v-bind="$attrs"
+    @click="onClick"
+  >
     <div class="al-btn__content">
       <slot></slot>
     </div>
@@ -9,6 +14,25 @@
 <script>
 export default {
   name: "AlibabaButton",
+  props: {
+    link: {
+      type: Boolean,
+    },
+    href: {
+      type: String,
+      default: "#",
+    },
+  },
+  methods: {
+    onClick(e) {
+      if (this.link) {
+        this.$router.push({
+          path: this.href,
+        });
+      }
+      this.$emit("click", e);
+    },
+  },
 };
 </script>
 

@@ -1,14 +1,20 @@
 <template>
   <al-card link :to="`/detail/${country.name}`" elevated rounded>
     <template #image>
-      <al-img height="160px" width="100%" :src="country.flag" />
+      <al-img
+        aspect-ratio="5 / 3"
+        :alt="`${country.name}'s flag`"
+        width="100%"
+        max-height="250px"
+        :src="country.flag"
+      />
     </template>
     <template #title>
       {{ country.name }}
     </template>
 
     <template #text>
-      <ul class="list-style-none mt-3">
+      <ul class="list-style-none mt-3 mb-6">
         <li>
           <span class="font-semibold text-sm mr-2">Population:</span>
           <span class="text-sm font-light">{{
