@@ -1,4 +1,4 @@
-# Alibaba chalange 🚀
+# Vue chalange 🚀
 
 ## Project setup 👨‍💻
 
